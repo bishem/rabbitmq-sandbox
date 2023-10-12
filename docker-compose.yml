@@ -10,7 +10,7 @@ services:
       - '15672:15672'
     environment:
       RABBITMQ_DEFAULT_USER: watch
-      RABBITMQ_DEFAULT_PASS: rabbithole
+      RABBITMQ_DEFAULT_PASS: teapot
   wonderland:
     hostname: wonderland
     container_name: wonderland
@@ -21,9 +21,6 @@ services:
       - '8080:8080'
     environment:
       - SPRING_RABBITMQ_HOST=rabbit
-      - SPRING_RABBITMQ_PORT=5672
-      - SPRING_RABBITMQ_USERNAME=watch
-      - SPRING_RABBITMQ_PASSWORD=rabbithole
     command: ['java', '-jar', 'wonderland.jar']
     volumes:
       - ./amqp-publisher/target/wonderland.jar:/wonderland.jar
@@ -39,4 +36,4 @@ services:
 
 networks:
   default:
-    name: sandbox
+    name: alice-in-wonderland

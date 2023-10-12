@@ -1,17 +1,20 @@
 build:
-	docker compose up -d --build
+	@docker compose down 
+	@./amqp-publisher/mvnw clean package
+	@docker compose up -d --build
 
 start:
-	docker compose start
+	@docker compose start
 
 stop:
-	docker compose stop
+	@docker compose stop
 
 down:
-	docker compose down
+	@docker compose down
 
 purge:
-	docker compose down --rmi all --volumes --remove-orphans
+	@docker compose down --rmi all --volumes --remove-orphans
+	@./amqp-publisher/mvnw clean
 
 follow:
-	docker compose logs --follow --tail 100 
+	@docker compose logs --follow --tail 100 
