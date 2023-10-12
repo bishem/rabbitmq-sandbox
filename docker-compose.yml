@@ -1,0 +1,42 @@
+version: sandbox
+
+services:
+  rabbit:
+    hostname: rabbit
+    container_name: rabbit
+    image: rabbitmq:management-alpine
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      RABBITMQ_DEFAULT_USER: watch
+      RABBITMQ_DEFAULT_PASS: rabbithole
+  wonderland:
+    hostname: wonderland
+    container_name: wonderland
+    image: eclipse-temurin:17-jdk-alpine
+    depends_on:
+      - rabbit
+    ports:
+      - '8080:8080'
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbit
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=watch
+      - SPRING_RABBITMQ_PASSWORD=rabbithole
+    command: ['java', '-jar', 'wonderland.jar']
+    volumes:
+      - ./amqp-publisher/target/wonderland.jar:/wonderland.jar
+  alice:
+    hostname: alice
+    container_name: alice
+    build: ./amqp-consumer
+    depends_on:
+      - rabbit
+    ports:
+      - '4200:80'
+    command: ['nginx', '-g', 'daemon off;']
+
+networks:
+  default:
+    name: sandbox
