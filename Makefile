@@ -1,7 +1,7 @@
 build:
 	@docker compose down 
-	@./amqp-publisher/mvnw clean package
-	@docker compose up -d --build
+	@cd amqp-publisher && ./mvnw clean package
+	@cd .. && docker compose up -d --build
 
 start:
 	@docker compose start
@@ -17,4 +17,8 @@ purge:
 	@./amqp-publisher/mvnw clean
 
 follow:
-	@docker compose logs --follow --tail 100 
+	@docker compose logs --follow --tail 100
+
+dev:
+	@docker compose -f rabbit.docker-compose.yml up -d
+	@cd amqp-publisher && ./mvnw spring-boot:run

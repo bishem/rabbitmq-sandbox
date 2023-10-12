@@ -14,13 +14,13 @@ RUN npm install
 COPY . .
 
 # Générez la version optimisée de l'application
-RUN npm run build --prod
+RUN polymer build
 
 # Utilisez une image légère Nginx pour servir l'application
 FROM nginx:stable-alpine
 
 # Copiez les fichiers générés de l'application vers le répertoire de contenu de Nginx
-COPY --from=build /app/dist/* /usr/share/nginx/html/
+COPY --from=build /app/build/* /usr/share/nginx/html/
 
 # Copiez le fichier de configuration Nginx
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf

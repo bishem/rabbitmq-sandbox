@@ -1,0 +1,17 @@
+version: sandbox
+
+services:
+  rabbit:
+    hostname: rabbit
+    container_name: rabbit
+    image: rabbitmq:management-alpine
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      RABBITMQ_DEFAULT_USER: watch
+      RABBITMQ_DEFAULT_PASS: teapot
+
+networks:
+  default:
+    name: alice-in-wonderland

@@ -1,0 +1,6 @@
+{
+  "name": "amqp-consumer",
+  "short_name": "amqp-consumer",
+  "start_url": "/",
+  "display": "standalone"
+}
