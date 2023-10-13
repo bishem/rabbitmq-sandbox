@@ -10,3 +10,6 @@ springdoc:
     path: /api
   swagger-ui:
     path: /swagger
+
+amqp:
+  queues:

@@ -39,10 +39,10 @@ public class Message {
   @Accessors(fluent = true)
   public enum Exchange {
     DEFAULT(""),
-    DIRECT("direct"),
-    FANOUT("fanout"),
-    TOPIC("topic"),
-    HEADERS("headers");
+    DIRECT("amq.direct"),
+    FANOUT("amq.fanout"),
+    TOPIC("amq.topic"),
+    HEADERS("amq.headers");
 
     private final String type;
   }

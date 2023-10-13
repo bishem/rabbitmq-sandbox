@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitmqConfiguration {
+public class AmqpConfiguration {
 
   @Value("${spring.rabbitmq.host}")
   private String host;
@@ -30,7 +30,7 @@ public class RabbitmqConfiguration {
   }
 
   @Bean
-  public AmqpTemplate template(ConnectionFactory factory) {
+  public AmqpTemplate template(final ConnectionFactory factory) {
     final RabbitTemplate template = new RabbitTemplate(factory);
     template.setUseDirectReplyToContainer(false);
     return template;

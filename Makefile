@@ -1,5 +1,5 @@
 build:
-	@docker compose down 
+	@docker compose down
 	@cd amqp-publisher && ./mvnw clean package
 	@cd .. && docker compose up -d --build
 
